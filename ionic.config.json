@@ -1,0 +1,7 @@
+{
+  "name": "Chatty-iOS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
