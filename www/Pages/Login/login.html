@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="../styles.css"/>
+  </head>
+  <body class="login-body">
+    <div class= "logo">
+      <img class="logo-image" src="../../Images/ChattyLogo.png" >
+    </div>
+    <div class="user-form">
+      <h1 style="text-align: center; font-size: 1.7rem">
+        💖 Welcome!
+      </h1>
+      <input class="custom-input" type="text" id="UserInput" name="UserInput" placeholder="Username">
+      <input class="custom-input" type="text" id="PassInput" name="PassInput" placeholder="Password">
+      <div id="login-buttons">
+        <button class="custom-button login-button" role="button" id="login-button">Login</button>
+        <button class="custom-button login-button" role="button" id="register-button">Register</button>
+      </div>
+      <p id="error-label" >Incorrect username/password</p>
+    </div>
+    <script src="login_scripts.js"></script>
+  </body>
+</html>

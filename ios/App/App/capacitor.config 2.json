@@ -1,6 +1,0 @@
-{
-	"appId": "com.alice.chatty",
-	"appName": "Chatty",
-	"webDir": "build",
-	"bundledWebRuntime": false
-}

@@ -1,1 +1,0 @@
-# Chatty for Mobile devices!
