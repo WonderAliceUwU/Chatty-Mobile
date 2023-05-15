@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <link rel="stylesheet" href="../styles.css"/>
   </head>
-  <body class="lobby-body">
-    <div class= "side-menu" id="side-menu">
-      <img src="../../Images/Logo.png" alt="pfp" style="width: 35px; height: 35px">
-      <div class="menu-item" id="side-menu-content">
+  <body class="lobby-body" id="lobby-body">
+  <div class= "side-menu" id="side-menu">
+    <div class="menu-item" id="side-menu-content">
 
-      </div>
     </div>
+    <div class="profile" id="profile-settings">
+      <button id="self-button" style="width: 95%" role="button">
+        <img class="user-pfp" id="self-pfp" style="margin-left: 0.5rem" src="" alt="pfp"><medium id="self-user">Sample text</medium>
+        <div class="friend-status" id="self-status">Sample text</div>
+      </button>
+      <button id="add-friend-button"><img src="../../Images/add-friend-button-light.png" id="friend-button-image"> </button>
+    </div>
+  </div>
     <div class="lobby-feed" id="lobby-feed">
       <div class="chat-bar">
-        <button class="custom-button" id="back-chat-button" role="button" style="background: transparent"> < </button>
+        <button id="sidebar-button"></button>
+        <!--button class="custom-button" id="back-chat-button" role="button" style="background: transparent"> < </button-->
         <div class="chat-user">
           <img class="chat-pfp" id="chat-pfp" src="" alt="pfp">
           <div style="width: 6rem">
@@ -28,13 +35,6 @@
     </div>
   </body>
   <body class="footer">
-  <div class="profile">
-    <button id="self-button" style="width: 95%" role="button">
-      <img class="user-pfp" id="self-pfp" style="margin-left: 0.5rem" src="" alt="pfp"><medium id="self-user">Sample text</medium>
-      <div class="friend-status" id="self-status">Sample text</div>
-    </button>
-    <button id="add-friend-button"><img src="../../Images/add-friend-button-light.png" id="friend-button-image"> </button>
-  </div>
     <div class="feed-fields">
       <input class="custom-input" type="text" id="feed-input" placeholder="What's happening?">
     </div>

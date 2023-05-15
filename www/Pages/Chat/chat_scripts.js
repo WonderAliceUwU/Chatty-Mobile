@@ -1,6 +1,6 @@
 document.getElementById('add-friend-button').addEventListener("click", openFriends)
 document.getElementById('self-button').addEventListener("click", openSettings)
-document.querySelector("#back-chat-button").addEventListener("click", openMain)
+//document.querySelector("#back-chat-button").addEventListener("click", openMain)
 let fullname = localStorage.getItem("userdata")
 let friendStatus = fullname.slice(fullname.indexOf(" "))
 document.getElementById('chat-username').textContent = fullname.split(" ")[0]
