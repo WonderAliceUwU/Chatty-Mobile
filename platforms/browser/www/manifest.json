@@ -1,9 +1,0 @@
-{
-  "background_color": "#FFF",
-  "display": "standalone",
-  "name": "Chatty",
-  "short_name": "Chatty",
-  "version": "Mobile",
-  "icons": [],
-  "start_url": "Pages/Login/login.html"
-}
