@@ -1,12 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="Mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="Chatty" version="1.0.0">
     <name>Chatty</name>
     <content src="Pages/Login/login.html" />
-    <platform name="ios">
-        <allow-navigation href="http://localhost:3000" />
-        <allow-navigation href="ws://localhost:3000" />
-        <!--icon src="www/Images/icon.png" platform="ios" width="57" height="57" density="mdpi" /-->
-    </platform>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-navigation href="*"/>
+    <access origin="*" />
+    <platform name="ios">
+        <!-- iOS-specific preferences -->
+        <preference name="DisallowOverscroll" value="false" />
+        <preference name="AutoHideSplashScreen" value="true" />
+        <!-- Allow navigation to specific URLs -->
+        <allow-navigation href="http://*/*" />
+        <allow-navigation href="https://*/*" />
+        <access origin="*" />
+    </platform>
 </widget>

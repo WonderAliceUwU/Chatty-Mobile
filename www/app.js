@@ -3,7 +3,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
   // Cordova is ready, you can now use Cordova APIs
   // Connect to the WebSocket server
-  var socket = new WebSocket('http://localhost:3000');
+  var socket = new WebSocket('http://'+localStorage.getItem('server'));
 
   // WebSocket event handlers
   socket.onopen = function() {

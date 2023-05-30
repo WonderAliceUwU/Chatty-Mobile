@@ -10,7 +10,7 @@ async function register(){
     if(username !== "" && password !== "" && passwordRep !== ""){
         if (password === passwordRep){
             try {
-                const response = await fetch('http://localhost:3000/register', {
+                const response = await fetch('http://'+ localStorage.getItem('server') +'/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -25,7 +25,8 @@ async function register(){
                 }
 
                 const data = await response.json();
-                location.href = '../Login/login.html'
+                cordova.InAppBrowser.open('../Login/login.html', '_self');
+
             } catch (err) {
                 console.error(err);
             }
@@ -53,5 +54,5 @@ if (passrepfield.type === "password") {
 }
 
 function goLogin(){
-    location.href='../Login/login.html'
+    cordova.InAppBrowser.open('../Login/login.html', '_self');
 }

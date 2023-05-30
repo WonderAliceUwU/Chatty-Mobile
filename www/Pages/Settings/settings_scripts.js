@@ -1,21 +1,24 @@
-document.getElementById('add-friend-button').addEventListener("click", openFriends)
 document.getElementById('back-button').addEventListener("click", openMain)
 document.getElementById('status-button').addEventListener("click", changeStatus)
 document.getElementById('pfp-input').addEventListener('change', enableUpload);
 document.getElementById('pfp-button').addEventListener('click', imageUpload);
+document.getElementById('logout-button').addEventListener('click', logout);
 document.getElementById('pfp-button').disabled = true
 
 function enableUpload(){
     document.getElementById('pfp-button').disabled = false;
 }
 
+function logout(){
+    cordova.InAppBrowser.open('../Login/login.html', '_self');
+}
 async function imageUpload() {
     const formData = new FormData();
     const imageFile = document.getElementById('pfp-input');
     formData.append('image', imageFile.files[0]);
     formData.append('username', localStorage.getItem('username'));
 // end AJAX request
-    const response = await fetch('http://localhost:3000/api/images', {
+    const response = await fetch('http://' + localStorage.getItem('server') + '/api/images', {
         method: 'POST',
         body: formData
     });
@@ -33,7 +36,7 @@ async function changeStatus(){
     const newPassword = ""
     const username = localStorage.getItem("username")
     try {
-        const response = await fetch('http://localhost:3000/change_profile', {
+        const response = await fetch('http://' + localStorage.getItem('server') + '/change_profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +50,7 @@ async function changeStatus(){
         if (response.ok){
             localStorage.setItem('status', newStatus)
             document.getElementById('status-input').value = "";
-            window.location.reload()
+            await window.location.reload()
         }
     } catch (err) {
         console.error(err);

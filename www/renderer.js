@@ -5,14 +5,25 @@ if (localStorage.getItem('status') !== 'null'){
 else{
     document.getElementById('self-status').textContent = ' '
 }
-document.getElementById('self-pfp').src = 'http://localhost:3000'+localStorage.getItem('selfProfilePicture')
+document.getElementById('self-pfp').src = 'http://'+ localStorage.getItem('server') +localStorage.getItem('selfProfilePicture')
+
+let inputChat = document.getElementById('input')
+if (inputChat !== null){
+    inputChat.addEventListener("focus", activateBorder);
+    inputChat.addEventListener("blur", deactivateBorder);
+}
+let prevColor = ''
+
+function activateBorder(){
+    prevColor = document.getElementById('input-wrapper').style.borderColor
+    document.getElementById('input-wrapper').style.borderColor = "#c65584"
+}
+
+function deactivateBorder(){
+    document.getElementById('input-wrapper').style.borderColor = prevColor
+}
 
 document.getElementById('toggle-dark-mode').addEventListener('click', async () => {
-    const isDarkMode = await window.darkMode.toggle()
-    document.getElementById('theme-source').innerHTML = isDarkMode ? 'Dark' : 'Light'
-})
-
-document.getElementById('login-theme-toggle').addEventListener('click', async () => {
     const isDarkMode = await window.darkMode.toggle()
     document.getElementById('theme-source').innerHTML = isDarkMode ? 'Dark' : 'Light'
 })

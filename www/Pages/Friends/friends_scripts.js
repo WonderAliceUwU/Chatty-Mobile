@@ -1,9 +1,9 @@
 document.getElementById('self-button').addEventListener("click", openSettings)
 document.getElementById('back-chat-button').addEventListener("click", openMain)
-let input = document.getElementById("feed-input");
+let input = document.getElementById("input");
 
 window.onload = async function () {
-    const response = await fetch(`http://localhost:3000/request-friend-requests?token=${localStorage.getItem('token')}`, {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/request-friend-requests?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ window.onload = async function () {
             friendButton.id = "friend-button-search"
             friendName.className = 'friend-name'
             pfp.className = 'user-pfp'
-            pfp.src = "http://localhost:3000"+ await getProfileUrl(requestsFriends[i].username)
+            pfp.src = "http://" + localStorage.getItem('server') + await getProfileUrl(requestsFriends[i].username)
             friendStatus.className = 'friend-status'
 
             friendName.textContent = requestsFriends[i].username
@@ -65,11 +65,12 @@ window.onload = async function () {
         }
     }
     await appendFriendList()
+    await refreshFriendsList()
 }
 
 async function searchFriends(requestedFriend) {
     console.log(requestedFriend)
-    const response = await fetch(`http://localhost:3000/request-friend?token=${localStorage.getItem('token')}`, {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/request-friend?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -109,7 +110,7 @@ async function searchFriends(requestedFriend) {
             friendButton.id = "friend-button-search"
             friendName.className = 'friend-name'
             pfp.className = 'user-pfp'
-            pfp.src = "http://localhost:3000"+await getProfileUrl(friends[i].username)
+            pfp.src = "http://" + localStorage.getItem('server')+await getProfileUrl(friends[i].username)
             friendStatus.className = 'friend-status'
 
             friendName.textContent = friends[i].username
@@ -132,7 +133,7 @@ async function searchFriends(requestedFriend) {
 
 async function makeFriendRequest(target, friendButton) {
 
-    let response = await fetch(`http://localhost:3000/make-request?token=${localStorage.getItem('token')}`, {
+    let response = await fetch(`http://` + localStorage.getItem('server') + `/make-request?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -145,7 +146,7 @@ async function makeFriendRequest(target, friendButton) {
 }
 
 async function acceptFriendRequest(target, friendButton) {
-    let response = await fetch(`http://localhost:3000/accept-request?token=${localStorage.getItem('token')}`, {
+    let response = await fetch(`http://` + localStorage.getItem('server') + `/accept-request?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -161,12 +162,12 @@ async function acceptFriendRequest(target, friendButton) {
 input.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
-        let message = input.value
+        let message = input.textContent
         if ((message !== null) && (message !== " ") && (message !== "")){
             // Cancel the default action, if needed
             event.preventDefault();
             // Trigger the button element with a click
-            let requestedFriend = input.value
+            let requestedFriend = input.textContent
             searchFriends(requestedFriend)
         }
     }

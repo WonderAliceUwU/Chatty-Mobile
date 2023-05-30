@@ -1,20 +1,56 @@
 document.getElementById('add-friend-button').addEventListener("click", openFriends)
 document.getElementById('self-button').addEventListener("click", openSettings)
-//document.querySelector("#back-chat-button").addEventListener("click", openMain)
+document.getElementById('send-button').addEventListener("click", sendMessageAction)
+document.querySelector("#back-chat-button").addEventListener("click", openMain)
 let fullname = localStorage.getItem("userdata")
 let friendStatus = fullname.slice(fullname.indexOf(" "))
 document.getElementById('chat-username').textContent = fullname.split(" ")[0]
 document.getElementById('chat-status').textContent = friendStatus
-let input = document.getElementById("feed-input");
+let input = document.getElementById("input");
 let friendPFP = document.getElementById('chat-pfp')
+const uploadButton = document.getElementById('image-button');
+const fileInput = document.getElementById('image-input');
+const settingButton = document.getElementById('chat-setting-button');
+settingButton.addEventListener('click', toggleSettingContainer);
+document.getElementById('unfriend-button').addEventListener('click', unfriendAction)
+let friend = localStorage.getItem("userdata").split(" ")[0].replace(/\s+/g, '')
 
+function toggleSettingContainer() {
+    document.getElementById('setting-container').classList.toggle('show');
+}
+
+async function unfriendAction() {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/unfriend?token=${localStorage.getItem('token')}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({friend}),
+    });
+    if (!response.ok) {
+        console.log("Error when loading chat")
+    }
+    if (response.ok) {
+        openMain()
+    }
+}
 
 window.onload = async function () {
-    let friend = localStorage.getItem("userdata").split(" ")[0].replace(/\s+/g, '')
+    friendPFP.src = "http://" + localStorage.getItem('server') + await getProfileUrl(friend)
+    await fetch(`http://` + localStorage.getItem('server') + `/read-friend?token=${localStorage.getItem('token')}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({friend}),
+    });
+    await appendFriendList('chat')
+    await refreshFriendsList()
+    await refreshMessages()
+}
 
-    friendPFP.src = "http://localhost:3000"+await getProfileUrl(friend)
-
-    const response = await fetch(`http://localhost:3000/request-chat?token=${localStorage.getItem('token')}`, {
+async function refreshMessages() {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/request-chat?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -28,10 +64,10 @@ window.onload = async function () {
         const data = await response.json();
         const feed = data.chat;
         let messagesDate = "1";
-        for (let i = feed.length-1; i >= 0; i--){
+        for (let i = feed.length - 1; i >= 0; i--) {
             let parent = document.getElementById('chat-div')
-            let currentDate = getMonthName(feed[i].createdAt.slice(6, 7)).slice(0, 3) + ' ' + feed[i].createdAt.slice(8,10);
-            if(currentDate!==messagesDate){
+            let currentDate = getMonthName(feed[i].createdAt.slice(6, 7)).slice(0, 3) + ' ' + feed[i].createdAt.slice(8, 10);
+            if (currentDate !== messagesDate) {
                 messagesDate = document.createElement('div')
                 messagesDate.textContent = currentDate
                 messagesDate.className = "chat-date"
@@ -40,20 +76,16 @@ window.onload = async function () {
 
                 messagesDate = currentDate
             }
-            applyMessage(feed[i].message, feed[i].username, feed[i].createdAt.slice(11,16))
+            if (feed[i].imageFilename !== null) {
+                applyMessage(feed[i].message, feed[i].username, feed[i].createdAt.slice(11, 16), feed[i].imageFilename)
+            } else {
+                applyMessage(feed[i].message, feed[i].username, feed[i].createdAt.slice(11, 16), null)
+            }
         }
     }
-    await fetch(`http://localhost:3000/read-friend?token=${localStorage.getItem('token')}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({friend}),
-    });
-    await appendFriendList('chat')
 }
 
-function applyMessage(text, username, hour){
+function applyMessage(text, username, hour, filename){
     let parent = document.getElementById('chat-div')
     let feedMessage=document.createElement('div')
     let feedBackground = document.createElement('div')
@@ -81,18 +113,25 @@ function applyMessage(text, username, hour){
     feedMessage.appendChild(feedBackground)
     feedBackground.appendChild(feedText)
 
-    let feed = document.getElementById('lobby-feed')
-    feed.scrollTop = feed.scrollHeight - feed.clientHeight;
+    if (filename !== null){
+        let image = document.createElement('img')
+        image.className = 'message-image'
+        image.src = 'http://' + localStorage.getItem('server') + '/uploads/' + filename
+        feedBackground.appendChild(image)
+    }
+    scrollToBottom()
 }
 
+
 function sendMessage(text){
-    var friend = localStorage.getItem("userdata").split(" ")[0].replace(/\s+/g, '')
-    fetch(`http://localhost:3000/send-message?token=${localStorage.getItem('token')}`, {
+    let friend = localStorage.getItem("userdata").split(" ")[0].replace(/\s+/g, '')
+    const formData = new FormData();
+    formData.append('image', fileInput.files[0]);
+    formData.append('text', text);
+    formData.append('friend', friend);
+    fetch(`http://` + localStorage.getItem('server') + `/send-message?token=${localStorage.getItem('token')}`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ friend, text }),
+        body: formData
     })
         .then(response => {
             if (!response.ok) {
@@ -101,7 +140,14 @@ function sendMessage(text){
             if(response.ok){
                 let today = new Date
                 let time = today.getHours() + ":" + today.getMinutes()
-                applyMessage(text, localStorage.getItem("username"), time)
+                if(fileInput.files.length === 0) {
+                    applyMessage(text, localStorage.getItem("username"), time, null)
+                }
+                else{
+                    refreshMessages()
+                }
+                input.textContent = ""
+                closeImageWrapper()
             }
         })
         .catch(error => {
@@ -112,13 +158,61 @@ function sendMessage(text){
 input.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
-        let message = input.value
-        if ((message !== null) && (message !== " ") && (message !== "")){
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Trigger the button element with a click
-            sendMessage(message)
-            input.value = ""
-        }
+        sendMessageAction()
     }
 });
+
+function sendMessageAction(){
+    let message = input.textContent
+    if ((message !== null) && (message !== " ") && (message !== "")){
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        sendMessage(message)
+        input.textContent = ""
+    }
+}
+
+uploadButton.addEventListener('click', () => {
+    fileInput.click();
+});
+
+// Handle the file selection
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+        const imageUrl = event.target.result;
+
+        // Create an <img> element
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.style.width = '15rem';
+        img.style.borderRadius = '1rem';
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'custom-button'
+        closeButton.id = 'close-image-button'
+        closeButton.addEventListener('click', closeImageWrapper)
+
+        document.getElementById('image-wrapper').innerHTML = '';
+        document.getElementById('image-wrapper').style.visibility = 'visible'
+        document.getElementById('image-wrapper').appendChild(img);
+        document.getElementById('image-wrapper').appendChild(closeButton);
+    };
+    reader.readAsDataURL(file);
+});
+
+function scrollToBottom(){
+    setTimeout(function() {
+        let feed = document.getElementById('lobby-feed');
+        feed.scrollTop = feed.scrollHeight - feed.clientHeight;
+    }, 200);
+}
+
+function closeImageWrapper(){
+    fileInput.value = '';
+    document.getElementById('image-wrapper').innerHTML = '';
+    document.getElementById('image-wrapper').style.visibility = 'hidden'
+}

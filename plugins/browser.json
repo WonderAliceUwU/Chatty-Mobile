@@ -9,6 +9,9 @@
   "installed_plugins": {
     "cordova-plugin-websocket": {
       "PACKAGE_NAME": "Mobile"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "Mobile"
     }
   },
   "dependent_plugins": {}

@@ -5,28 +5,30 @@ let toggled = false;
 // Toggle sidebar visibility
 function toggleSidebar() {
     if(toggled === false){
-        body.style.gridTemplateColumns = '60% 100%'
+        body.style.gridTemplateColumns = '60% 1fr'
         document.getElementById('side-menu-content').style.visibility = 'visible'
         document.getElementById('profile-settings').style.visibility = 'visible'
-        document.getElementById('feed-input').style.marginLeft = '16.5rem'
+        document.getElementById('input-wrapper').style.marginLeft = '16.5rem'
+        document.getElementById('lobby-body').className = 'lobby-body-expanded'
         toggled = true
     }
     else{
-        body.style.gridTemplateColumns = '0% 100%'
         document.getElementById('side-menu-content').style.visibility = 'hidden'
         document.getElementById('profile-settings').style.visibility = 'hidden'
-        document.getElementById('feed-input').style.marginLeft = '0rem'
+        body.style.gridTemplateColumns = '0% 1fr'
+        document.getElementById('input-wrapper').style.marginLeft = '0.5rem'
+        document.getElementById('lobby-body').className = 'lobby-body'
         toggled = false
     }
 }
 
-function newMessage() {
+function newMessage(text, from ) {
     let today = new Date
     let time = today.getHours() + ":" + today.getMinutes()
     let friend = document.getElementById('visitedName').textContent
     if (friend === from) {
         applyMessage(text, time)
-        fetch(`http://localhost:3000/read-friend?token=${localStorage.getItem('token')}`, {
+        fetch(`http://` + localStorage.getItem('server') + `/read-friend?token=${localStorage.getItem('token')}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +48,7 @@ function newMessage() {
         friendElement.parentNode.className = 'unread-button'
     }
 }
-function applyUnread() {
+function applyUnread(from) {
     const friendElements = document.querySelectorAll('.friend-name');
     let friendElement;
 
@@ -85,25 +87,29 @@ function applyMessage(text, time) {
 }
 
 function openFriends() {
-    location.href = "../Friends/friends.html"
+    cordova.InAppBrowser.open('../Friends/friends.html', '_self');
+
 }
 
 function openMain() {
-    location.href = "../Main/main.html"
+    cordova.InAppBrowser.open('../Main/main.html', '_self');
 }
+
 
 function openSettings() {
     localStorage.setItem("setting", "General")
-    location.href = "../Settings/settings.html"
+    cordova.InAppBrowser.open('../Settings/settings.html', '_self');
+
 }
 
 function openChat(friendName) {
     localStorage.setItem("userdata", friendName)
-    location.href = '../Chat/chat.html';
+    cordova.InAppBrowser.open('../Chat/chat.html', '_self');
+
 }
 
 async function getProfileUrl(username) {
-    const response = await fetch(`http://localhost:3000/request-pfp-url`, {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/request-pfp-url`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -126,7 +132,7 @@ function getMonthName(monthNumber) {
 
 
 async function appendFriendList(mode) {
-    const response = await fetch(`http://localhost:3000/request-list-friend?token=${localStorage.getItem('token')}`, {
+    const response = await fetch(`http://` + localStorage.getItem('server') + `/request-list-friend?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -134,7 +140,7 @@ async function appendFriendList(mode) {
         body: JSON.stringify({}),
     });
 
-    const respondeUnreads = await fetch(`http://localhost:3000/request-unreads?token=${localStorage.getItem('token')}`, {
+    const respondeUnreads = await fetch(`http://` + localStorage.getItem('server') + `/request-unreads?token=${localStorage.getItem('token')}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -157,7 +163,7 @@ async function appendFriendList(mode) {
         for (let i = friendships.length - 1; i >= 0; i--) {
             let url
             let username = friendships[i].username
-            const responsePFP = await fetch(`http://localhost:3000/request-pfp-url`, {
+            const responsePFP = await fetch(`http://` + localStorage.getItem('server') + `/request-pfp-url`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -188,7 +194,7 @@ async function appendFriendList(mode) {
 
             friendName.className = 'friend-name'
             pfp.className = 'user-pfp'
-            pfp.src = "http://localhost:3000" + url
+            pfp.src = "http://" + localStorage.getItem('server') + url
             friendStatus.className = 'friend-status'
 
             friendName.textContent = friendships[i].username
@@ -203,7 +209,7 @@ async function appendFriendList(mode) {
 
             friendButton.addEventListener("click", function () {
                 localStorage.setItem("userdata", friendName.textContent + " " + friendStatus.textContent)
-                location.href = '../Chat/chat.html';
+                cordova.InAppBrowser.open('../Chat/chat.html', '_self');
             });
 
             if (mode === 'chat') {
@@ -213,6 +219,24 @@ async function appendFriendList(mode) {
                     friendButton.role = "button"
                 }
             }
+        }
+    }
+}
+
+async function refreshFriendsList() {
+    const response = await fetch(`http://`+ localStorage.getItem('server') +`/request-friend-requests?token=${localStorage.getItem('token')}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    });
+    if (response.ok) {
+        const data = await response.json();
+        const requestsFriends = data.requestsFriends;
+        console.log(data.requestsFriends)
+        if (requestsFriends.length > 0) {
+            document.getElementById('friend-button-image').id = 'friend-button-image-new'
         }
     }
 }

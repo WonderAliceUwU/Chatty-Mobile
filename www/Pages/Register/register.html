@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="../../cordova.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="../styles.css"/>
@@ -9,8 +10,8 @@
     <div class= "logo">
       <img class="logo-image" src="../../Images/ChattyLogo.png" >
     </div>
-    <div class="user-form">
-      <h1 style="text-align: center; font-size: 1.7rem">
+    <div class="user-form" style="margin-top: 4rem">
+      <h1 style="text-align: center">
         💖 Welcome!
       </h1>
       <input class="custom-input" type="text" id="UserInput" name="UserInput" placeholder="Put a username">
@@ -23,6 +24,8 @@
       <p id="error-label" >The username is already taken</p>
     </div>
     <script src="../../renderer.js"></script>
+    <script src="../../functions.js"></script>
+    <script src="../../app.js"></script>
     <script src="register_scripts.js"></script>
   </body>
 </html>
