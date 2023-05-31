@@ -1,4 +1,3 @@
-document.getElementById('add-friend-button').addEventListener("click", openFriends)
 document.getElementById('self-button').addEventListener("click", openSettings)
 document.getElementById('send-button').addEventListener("click", sendMessageAction)
 document.querySelector("#back-chat-button").addEventListener("click", openMain)
@@ -45,7 +44,6 @@ window.onload = async function () {
         body: JSON.stringify({friend}),
     });
     await appendFriendList('chat')
-    await refreshFriendsList()
     await refreshMessages()
 }
 

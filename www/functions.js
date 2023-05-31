@@ -5,7 +5,7 @@ let toggled = false;
 // Toggle sidebar visibility
 function toggleSidebar() {
     if(toggled === false){
-        body.style.gridTemplateColumns = '60% 1fr'
+        body.style.gridTemplateColumns = '60% 100%'
         document.getElementById('side-menu-content').style.visibility = 'visible'
         document.getElementById('profile-settings').style.visibility = 'visible'
         document.getElementById('input-wrapper').style.marginLeft = '16.5rem'

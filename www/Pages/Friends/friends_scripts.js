@@ -1,5 +1,6 @@
 document.getElementById('self-button').addEventListener("click", openSettings)
 document.getElementById('back-chat-button').addEventListener("click", openMain)
+document.getElementById('send-button').addEventListener("click", searchFriend)
 let input = document.getElementById("input");
 
 window.onload = async function () {
@@ -162,13 +163,17 @@ async function acceptFriendRequest(target, friendButton) {
 input.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
     if (event.key === "Enter") {
-        let message = input.textContent
-        if ((message !== null) && (message !== " ") && (message !== "")){
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Trigger the button element with a click
-            let requestedFriend = input.textContent
-            searchFriends(requestedFriend)
-        }
+        searchFriend()
     }
 });
+
+function searchFriend(){
+    let message = input.textContent
+    if ((message !== null) && (message !== " ") && (message !== "")){
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        let requestedFriend = input.textContent
+        searchFriends(requestedFriend)
+    }
+}

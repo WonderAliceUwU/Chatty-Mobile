@@ -2,7 +2,7 @@
 <html>
   <head>
     <script src="../../cordova.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <meta name="viewport" content="default-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;, width=device-width, initial-scale=1, maximum-scale=1.0, viewport-fit=cover" http-equiv="Content-Security-Policy" charset="UTF-8">
     <link rel="stylesheet" href="../styles.css"/>
   </head>
   <body class="lobby-body" id="lobby-body">
@@ -28,18 +28,17 @@
     </div>
   </body>
   <body class="footer">
-  <div class="profile">
-    <button id="self-button" role="button">
-      <img id="self-pfp" src="" alt="pfp">
-      <div style="display: flex; flex-direction: column">
-        <medium id="self-user">Sample text</medium>
-        <div class="friend-status" id="self-status">Sample text</div>
-      </div>
-    </button>
-    <button id="add-friend-button"><img src="../../Images/add-friend-button-light.png" id="friend-button-image"> </button>
   </div>
     <div class="feed-fields">
-      <div id="image-wrapper"></div>
+      <div class="profile" id="profile-settings">
+        <button id="self-button" role="button">
+          <img id="self-pfp" src="" alt="pfp">
+          <div style="display: flex; flex-direction: column; margin-left: 1rem">
+            <medium id="self-user">Sample text</medium>
+            <div class="friend-status" id="self-status">Sample text</div>
+          </div>
+        </button>
+      </div>
       <div id="input-wrapper">
         <div id="input" contentEditable placeholder="What's happening?" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
         <button id="send-button" class="custom-button"></button>

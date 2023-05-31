@@ -16,15 +16,20 @@
 *{
   box-sizing: border-box;
   font-family: 'CustomRegular', sans-serif;
+  letter-spacing: -0.5px;
 }
 
 html, body{
-  height: 100%;
-  overflow: hidden;
+  height: 110%;
+    overflow: hidden;
+    font-size: 1.05rem;
+    position: absolute;
+    width: 100%;
 }
 
 .profile{
   margin-bottom: 1rem;
+  margin-top: 2rem;
   display: flex;
   border-radius: 8px;
   margin-left: 0.5rem;
@@ -32,7 +37,7 @@ html, body{
   align-items: center;
   transition: all 200ms;
   visibility: hidden;
-  width: 100%;
+  width: 93%;
 }
 
 
@@ -43,12 +48,15 @@ html, body{
   -webkit-app-region: drag;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
+  padding-top: 20%;
+  padding-bottom: 50%;
 }
 
 #login-buttons{
   grid-template-columns: 45% 65%;
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
   text-align: center;
   justify-content: center;
 }
@@ -63,6 +71,8 @@ html, body{
   column-gap: 0.5rem;
   overflow-y: hidden;
   overflow-x: hidden;
+  padding-top: 12%;
+  padding-bottom: 28%;
 }
 
 .feed-message{
@@ -71,14 +81,14 @@ html, body{
 }
 
 .self-message{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   color: #e3e3e3;
   margin-right: 1rem;
   align-self: end;
 }
 
 .friend-message{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   color: #e3e3e3;
   max-width: 90%;
   align-self: start;
@@ -119,7 +129,7 @@ html, body{
 
 .setting-body{
     font-family: 'CustomRegular', sans-serif;
-    margin: 0.5rem auto auto;
+    margin: 3rem auto auto;
     text-align: center;
     display: grid;
     grid-template-columns: 10% 90%;
@@ -140,6 +150,7 @@ html, body{
     background-position: center;
     background-repeat: no-repeat;
     background-image: url(../Images/close-button-dark.png);
+    background-color: #c65584;
 }
 
 
@@ -201,7 +212,7 @@ html, body{
     background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
-    margin-left: 4rem;
+    margin-left: 3rem;
     margin-right: 2rem;
 }
 
@@ -242,12 +253,13 @@ html, body{
 }
 
 #image-wrapper{
-    width: 100%;
+    width: 96%;
+    margin-left: 0.5rem;
     border-radius: 1rem;
     padding: 0.5rem;
     text-align: start;
     position: absolute;
-    bottom: 4rem;
+    bottom: 19%;
     font-family: CustomRegular, sans-serif;
     font-size: 18px;
     font-weight: 600;
@@ -355,8 +367,8 @@ html, body{
     position: absolute;
     display: flex;
     flex-direction: column;
-    left: 39.5%;
-    top: 73%;
+    left: 35.5%;
+    top: 95%;
     column-gap: 0.5rem;
 }
 
@@ -434,7 +446,7 @@ html, body{
   border-radius: 8px;
 }
 
-#friend-button-search:hover{
+#friend-button-search{
   background: url("../Images/green-check.png");
   background-size: 1rem;
   background-position: center right 1rem;
@@ -442,9 +454,9 @@ html, body{
 }
 
 #friend-bar{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 26% 5% 34%;
 }
 
 .feed-image{
@@ -600,8 +612,8 @@ html, body{
   width: 90%;
 }
 .results-div{
-  column-count: 2;
-  margin-left: -1.8rem;
+  column-count: 1;
+  text-align: initial;
 }
 
 .feed-fields{
@@ -632,8 +644,8 @@ html, body{
 
 #top-bar{
   display: grid;
-  column-count: 2;
-  grid-template-columns: 45% 65%;
+  column-count: 3;
+  grid-template-columns: 44% 36% 44%;
   position: fixed;
   width: 100%;
   padding: 0.6rem;
@@ -652,7 +664,7 @@ html, body{
 .logo-image{
   object-fit: contain;
   width: 80%;
-  height: 80%;
+  height: 100%;
 }
 
 .user-form{
@@ -735,11 +747,11 @@ html, body{
 }
 
 #self-button{
-    width: 20rem;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    margin-left: -0.7rem;
-
+    background-size: 1rem;
+    background-position: center right 0.5rem;
+    background-repeat: no-repeat;
 }
 
 .feed-user-button{
@@ -867,13 +879,13 @@ html, body{
     #friend-button-image-new{content: url("../Images/add-friend-button-dark-badged.png")}
     .lobby-body-expanded{background: linear-gradient(to right, #494949 60%, #333 0%)}
     .lobby-body{  background: #494949 }
-    .friend-button:hover, #setting-container, .unread-button:hover, #friend-button-search:hover, .profile:hover, .setting-button:hover, #emoji-button:hover, #send-button:hover, #image-button:hover, .feed-message-background{background-color: #3A3A3AB2;}
+    .friend-button:hover, #setting-container, .unread-button:hover, #friend-button-search, .profile, .setting-button:hover, #emoji-button:hover, #send-button:hover, #image-button:hover, .feed-message-background{background-color: #3A3A3AB2;}
     .friend-button, .unread-button, .setting-button, .feed-user-button, #self-button, #self-user{color: #f2f3f5;}
     .feed-message{color: #dcdee1}
     ::-webkit-scrollbar-thumb{background-color: rgba(108, 108, 108, 0.7)}
     .friend-status, .feed-date, .chat-date, .chat-hour{color: #b6b6b6;}
     #visitedButton{background-color: #3A3A3AB2; color: white;}
-    #ip-button{  background-image: url(../Images/settings-icon-dark.png);}
+    #ip-button, #self-button{  background-image: url(../Images/settings-icon-dark.png);}
     #unfriend-button{  background-image: url(../Images/close-button-dark.png);}
     #unfriend-button:hover{ background-color: #c65584; color: white;}
     #chat-setting-button{background-image: url("../Images/menu-dark.png");}
@@ -894,13 +906,13 @@ html, body{
     .side-menu{background: #dadada}
     #feed-input, #input-wrapper, #send-feed-button, .feed-message-background{background-color: #dadada; border-color: #dadada;}
     #image-wrapper{background-color: #dadada; border: 2px solid #c65584;}
-    .friend-button:hover, #setting-container, .unread-button:hover,  #friend-button-search:hover, .profile:hover, .setting-button:hover, .setting-separator, #emoji-button:hover, #send-button:hover, #image-button:hover {background-color: #c4c4c4;}
+    .friend-button:hover, #setting-container, .unread-button:hover,  #friend-button-search, .profile, .setting-button:hover, .setting-separator, #emoji-button:hover, #send-button:hover, #image-button:hover {background-color: #c4c4c4;}
     .friend-button, .feed-user-button, #self-button, .unread-button, .setting-button{color: #363636;}
     .friend-status, .feed-date, .chat-date, .chat-hour, #chat-status{color: #696969;}
     #visitedButton, #unfriend-button, ::-webkit-scrollbar-thumb{background-color: #adadad; color: #363636;}
-    #ip-button{  background-image: url(../Images/settings-icon-light.png);}
+    #ip-button, #self-button{  background-image: url(../Images/settings-icon-light.png);}
     #unfriend-button{  background-image: url(../Images/close-button-light.png);}
-    #close-image-button:hover, #unfriend-button:hover{  background-image: url(../Images/close-button-dark.png); background-color: #c65584; color: white;}
+    #unfriend-button:hover{  background-image: url(../Images/close-button-dark.png); background-color: #c65584; color: white;}
     #chat-setting-button{background-image: url("../Images/menu-light.png");}
     #chat-setting-button:hover{background-image: url("../Images/menu-dark.png");}
 }

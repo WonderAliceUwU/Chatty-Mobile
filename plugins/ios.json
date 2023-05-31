@@ -8,10 +8,10 @@
   },
   "installed_plugins": {
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "Chatty"
+      "PACKAGE_NAME": "Mobile"
     },
     "cordova-plugin-websocket": {
-      "PACKAGE_NAME": "Chatty"
+      "PACKAGE_NAME": "Mobile"
     }
   },
   "dependent_plugins": {}

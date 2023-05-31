@@ -1,25 +1,51 @@
+
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
   // Cordova is ready, you can now use Cordova APIs
   // Connect to the WebSocket server
-  var socket = new WebSocket('http://'+localStorage.getItem('server'));
+  window.addEventListener('keyboardWillShow', onKeyboardShow);
+  window.addEventListener('keyboardWillHide', onKeyboardHide);
 
-  // WebSocket event handlers
-  socket.onopen = function() {
-    console.log('WebSocket connection established');
-  };
 
-  socket.onmessage = function(event) {
-    console.log('Received message:', event.data);
-    // Handle the received message here
-  };
+  // Obtain a reference to the Socket.IO plugin
+  var socket = io.connect('http://' + localStorage.getItem('server'), {
+    query: {
+      username: localStorage.getItem('username')
+    }
+  });
 
-  socket.onclose = function(event) {
-    console.log('WebSocket connection closed:', event.code, event.reason);
-  };
+  // Listen for incoming messages
+  socket.on('message', function(data) {
+    // Process the incoming message based on the location
+    var location = window.location.href;
+    var lastIndex = location.lastIndexOf('html');
+    location = location.slice(lastIndex - 5, lastIndex - 1);
+    if (location === 'chat') {
+      // Send the message to the chat page
+      cordova.plugins.notification.local.schedule({
+        title: 'New Message',
+        text: data.text,
+        foreground: true
+      });
+    } else {
+      // Send the message to the other page
+      cordova.plugins.notification.local.schedule({
+        title: 'New Message',
+        text: 'You have a new message from ' + data.from,
+        foreground: true
+      });
+    }
+    console.log('Received message from ' + data.from + ': ' + data.text);
+  });
+}
 
-  socket.onerror = function(error) {
-    console.error('WebSocket error:', error);
-  };
+function onKeyboardShow(e) {
+  document.getElementById('lobby-body').style.paddingBottom = '0%'
+}
+
+// Keyboard hide event handler
+function onKeyboardHide() {
+  window.scrollTo(0, 0);
+  document.getElementById('lobby-body').style.paddingBottom = '28%'
 }

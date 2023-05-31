@@ -12,6 +12,12 @@
     },
     "cordova-plugin-websocket": {
       "PACKAGE_NAME": "com.company.Chatty"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.company.Chatty"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "com.company.Chatty"
     }
   },
   "dependent_plugins": {}
