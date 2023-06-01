@@ -7,16 +7,16 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-websocket": {
-      "PACKAGE_NAME": "Mobile"
-    },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "Mobile"
+      "PACKAGE_NAME": "Chatty"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "Chatty"
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "Chatty"
     },
-    "cordova-plugin-keyboard": {
+    "cordova-plugin-websocket": {
       "PACKAGE_NAME": "Chatty"
     }
   },

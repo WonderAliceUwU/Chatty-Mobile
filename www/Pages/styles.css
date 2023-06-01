@@ -80,6 +80,12 @@ html, body{
   margin-top: 1rem;
 }
 
+#version-text{
+    position: absolute;
+    top: 92%;
+    left: 94%;
+}
+
 .self-message{
   margin-top: 0.5rem;
   color: #e3e3e3;
