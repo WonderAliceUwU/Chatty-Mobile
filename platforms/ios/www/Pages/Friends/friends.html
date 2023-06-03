@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../cordova.js"></script>
+    <meta name="viewport" content="default-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;, width=device-width, initial-scale=1, maximum-scale=1.0, viewport-fit=cover" http-equiv="Content-Security-Policy" charset="UTF-8">
+    <link rel="stylesheet" href="../styles.css"/>
+  </head>
+  <body class="lobby-body" id="lobby-body">
+    <div class= "side-menu" id="side-menu">
+      <div class="menu-item" id="side-menu-content">
+        <img src="../../Images/Logo.png" alt="pfp" style="width: 35px; height: 35px">
+
+      </div>
+    </div>
+    <div class="lobby-feed" id="lobby-feed">
+      <div id="friend-bar">
+        <button id="sidebar-button"></button>
+        <button class="custom-button" id="back-chat-button" role="button" style="background: transparent"> < </button>
+        <h3>Add friend</h3>
+      </div>
+      <div class="setting-item" id="search-div">
+        <h2 class="setting-name" id="setting-name">Pending requests</h2>
+        <hr class="setting-separator">
+        <div class="results-div" id="results-div">
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <body class="footer">
+  </div>
+    <div class="feed-fields">
+      <div class="profile" id="profile-settings">
+        <button id="self-button" role="button">
+          <img id="self-pfp" src="" alt="pfp">
+          <div style="display: flex; flex-direction: column; margin-left: 1rem">
+            <medium id="self-user">Sample text</medium>
+            <div class="friend-status" id="self-status">Sample text</div>
+          </div>
+        </button>
+      </div>
+      <div id="input-wrapper">
+        <div id="input" contentEditable placeholder="Search for a friend" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+        <button id="send-button" class="custom-button"></button>
+      </div>    </div>
+  </body>
+  <script src="../../renderer.js"></script>
+  <script src="../../functions.js"></script>
+  <script src="../../app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+  <script src="friends_scripts.js"></script>
+</html>

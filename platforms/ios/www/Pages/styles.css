@@ -1,0 +1,932 @@
+@font-face {
+  font-family: 'CustomRegular';
+  src: url('../Fonts/PatuaOne.ttf');
+}
+
+::-webkit-scrollbar {
+  width: 21px;
+  margin: 5rem;
+}
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+*{
+  box-sizing: border-box;
+  font-family: 'CustomRegular', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+html, body{
+  height: 110%;
+    overflow: hidden;
+    font-size: 1.05rem;
+    position: absolute;
+    width: 100%;
+}
+
+.profile{
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  border-radius: 8px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  align-items: center;
+  transition: all 200ms;
+  visibility: hidden;
+  width: 93%;
+}
+
+
+.login-body {
+  font-family: 'CustomRegular', sans-serif;
+  margin: auto;
+  text-align: center;
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  padding-top: 20%;
+  padding-bottom: 50%;
+}
+
+#login-buttons{
+  grid-template-columns: 45% 65%;
+  display: grid;
+  grid-gap: 0.5rem;
+  text-align: center;
+  justify-content: center;
+}
+
+#lobby-body{
+  font-family: 'CustomRegular', sans-serif;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 0% 100%;
+  grid-template-rows: 87%;
+  column-gap: 0.5rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding-top: 12%;
+  padding-bottom: 28%;
+}
+
+.feed-message{
+  text-align: left;
+  margin-top: 1rem;
+}
+
+#version-text{
+  position: absolute;
+  top: 80%;
+  left: 82%;
+}
+
+#default-ip-button{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.self-message{
+  margin-top: 0.5rem;
+  color: #e3e3e3;
+  margin-right: 1rem;
+  align-self: end;
+  max-width: 75%;
+}
+
+.friend-message{
+  margin-top: 0.5rem;
+  color: #e3e3e3;
+  max-width: 75%;
+  align-self: start;
+}
+
+.feed-message-background{
+  border-radius: 8px;
+  width: 95%;
+}
+
+.self-message-background{
+  border-radius: 12px 12px 0 12px;
+  background-color: #b66080;
+}
+
+.friend-message-background{
+  border-radius: 12px 12px 12px 0;
+  background-color: #a15088;
+}
+
+#friend-button-image{
+  width: 1.5rem;
+  background-color: transparent;
+  height: 1.5rem;
+  border: none;
+}
+
+.lobby-body, .lobby-body-expanded{
+    font-family: 'CustomRegular', sans-serif;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 18rem 1fr;
+    grid-template-rows: 87%;
+    margin-right: 0.7rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.setting-body{
+    font-family: 'CustomRegular', sans-serif;
+    margin: 3rem auto auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 87%;
+    column-gap: 1rem;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+#close-image-button{
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    left: 88%;
+    top: -7%;
+    background-size: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../Images/close-button-dark.png);
+    background-color: #c65584;
+}
+
+
+#friend-button-image-new{
+    width: 1.5rem;
+    background-color: transparent;
+    height: 1.5rem;
+    border: none;
+}
+
+#unfriend-button{
+    margin: 0.5rem;
+    height: 3rem;
+    background-size: 1rem;
+    background-position: center right 1rem;
+    background-repeat: no-repeat;
+    text-align: start;
+    border-radius: 0.7rem;
+}
+
+#feed-icon{
+    width: 25px;
+    height: 25px;
+    margin-top: 4px
+}
+.chat-image{
+    width: 15rem;
+    margin: 0 0.6rem 0.3rem;
+    border-radius: 0.5rem;
+}
+
+#image-input{
+    visibility: hidden;
+    width: 15rem;
+}
+
+.message-image{
+    width: 15rem;
+    margin: 0.3rem;
+    margin-bottom: 0rem;
+    border-radius: 0.5rem;
+}
+
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+
+#chat-setting-button{
+    height: 2rem;
+    background-size: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 3rem;
+    margin-right: 2rem;
+}
+
+#input {
+    min-height: 1em; /* prevent height collapsing when there is no text */
+    max-height: 12rem;
+    width: 100%;
+    align-content: center;
+    outline: none;
+    overflow: hidden;
+    padding-right: 1.5rem;
+    cursor: text;
+}
+
+#input-wrapper{
+    width: 96%;
+    border-radius: 0.7rem;
+    padding: 0.5rem;
+    max-height: 13rem;
+    text-align: start;
+    position: absolute;
+    font-family: CustomRegular, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    outline: none;
+    z-index: 1;
+    -webkit-app-region: no-drag;
+    display: flex;
+    column-gap: 0.5rem;
+    margin-right: 10px;
+    margin-top: 1rem;
+    align-items: center;
+    border-style: inset;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+}
+
+#image-wrapper{
+    width: 96%;
+    margin-left: 0.5rem;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    text-align: start;
+    position: absolute;
+    bottom: 19%;
+    font-family: CustomRegular, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    outline: none;
+    z-index: 1;
+    visibility: hidden;
+    -webkit-app-region: no-drag;
+    display: flex;
+    align-items: center;
+    border-style: inset;
+}
+
+[contenteditable][placeholder]:empty:before {
+    content: attr(placeholder);
+    position: absolute;
+    color: gray;
+    background-color: transparent;
+}
+
+#pfp-input{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 51%;
+    color: #c2c2c2;
+}
+
+#self-pfp{
+    width:40px;
+    height:40px;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.setting-pfp{
+    width:50px;
+    height:50px;
+    z-index: 2;
+    border-radius: 50%;
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.profile-setting-div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 79%;
+    border-radius: 1rem;
+}
+
+.profile-setting-background{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+#profile-setting{
+    width: 100%;
+    display: grid;
+    align-items: center;
+    column-count: 2;
+    justify-content: center;
+    grid-template-columns: 10% 90%;
+    cursor: default;
+}
+
+#login-theme-toggle, #ip-button{
+    background-color: rgba(73,73,73,0);
+    top: 2.5%;
+    left: 95%;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: none;
+    z-index: 1;
+    padding: 0;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    position: absolute;
+}
+
+#ip-button{
+    left: 5%;
+    top: 2.3%;
+    background-size: 1.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#setting-container{
+    width: 15rem;
+    height: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 35.5%;
+    top: 95%;
+    column-gap: 0.5rem;
+}
+
+#input-container {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    position: absolute;
+    margin-left: 4rem;
+    top: 2%;
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+#change-ip-button{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+#input-container.show {
+    width: 16rem;
+}
+
+#setting-container.show{
+    justify-content: flex-start;
+    width: 14rem;
+    height: 4rem;
+    border-radius: 1rem;
+}
+
+#emoji-button{
+    max-height: 30px;
+    height: 2rem;
+    width: 2rem;
+    background-image: url(../Images/emoji-icon-color.png);
+    background-position: center;
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+#send-button{
+    max-height: 30px;
+    height: 2rem;
+    width: 2rem;
+    background-image: url(../Images/send-message.png);
+    background-position: center;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+#image-button{
+    max-height: 30px;
+    height: 2rem;
+    width: 2rem;
+    background-image: url(../Images/upload-image-icon.png);
+    background-position: center;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+
+#add-friend-button{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  width: 5rem;
+  border-radius: 8px;
+}
+
+#friend-button-search{
+  background: url("../Images/green-check.png");
+  background-size: 1rem;
+  background-position: center right 1rem;
+  background-repeat: no-repeat;
+}
+
+#friend-bar{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 26% 5% 34%;
+}
+
+.feed-image{
+  width: 450px;
+  margin: 1rem;
+  border-radius: 8px;
+}
+
+.feed-div{
+  overflow-y: scroll;
+  flex: 1;
+  overflow: visible;
+  margin-top: 4rem;
+}
+
+.chat-div{
+  margin-top: 3rem;
+  overflow-y: scroll;
+  flex: 1;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-content{
+  width: 90%;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.self-message-content{
+  padding: 0.5rem;
+  text-align: right;
+}
+
+
+.friend-message-content{
+  margin-left: 0.2rem;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.footer{
+  font-family: 'CustomRegular', sans-serif;
+  margin-top: 1rem;
+  position: absolute;
+  bottom: 10px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 15%;
+  grid-gap: 1rem;
+}
+
+.chat-user{
+  font-family: 'CustomRegular', sans-serif;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chat-bar{
+  align-items: center;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  column-gap: 1rem;
+}
+
+
+#feed-input{
+  font-family: CustomRegular, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+  height: 3rem;
+  outline: none;
+  z-index: 1;
+  -webkit-app-region: no-drag;
+  position: absolute; /* add this property to enable absolute positioning */
+  bottom: 1rem;
+  margin-top: 1rem;
+  width: 96%;
+  margin-left: 0.5rem;
+  background-image: url('../Images/send-message.png');
+  background-position: center right 0.5rem;
+  background-size: 22px;
+  background-repeat: no-repeat;
+}
+
+#send-feed-button{
+  padding: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.friend-button, .setting-button, .unread-button{
+  text-align:left;
+  width: 90%;
+  background-color: transparent;
+}
+
+.user-pfp{
+  width:40px;
+  height:40px;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.chat-pfp{
+  width:45px;
+  height:45px;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.chat-hour{
+  text-align: right;
+}
+
+.chat-date{
+  text-align: center;
+  font-size: 16px;
+  padding: 1rem;
+}
+
+.friend-status, .feed-date, .chat-hour {
+  font-size: 12px;
+}
+
+#chat-status{
+  font-size: 12px;
+}
+
+.user-item, .search-item{
+  position: relative;
+  display: inline-block;
+  margin-top: 0.3rem;
+  width: 100%;
+  background-color: transparent;
+}
+
+.search-item{
+  width: 90%;
+}
+.results-div{
+  column-count: 1;
+  text-align: initial;
+}
+
+.feed-fields{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+    align-self: end;
+}
+
+.lobby-feed{
+  text-align: center;
+  overflow-y: auto;
+  margin-bottom: -2rem;
+}
+
+#side-menu{
+  text-align: center;
+  width: 100%;
+  -webkit-app-region: drag;
+  transition: left 0.3s ease-in-out;
+}
+
+#side-menu-content{
+  visibility: hidden;
+}
+
+#top-bar{
+  display: grid;
+  column-count: 3;
+  grid-template-columns: 44% 36% 44%;
+  position: fixed;
+  width: 100%;
+  padding: 0.6rem;
+  z-index: 1;
+  align-items: center;
+}
+
+.logo{
+  width: 85%;
+  height: 85%;
+  z-index: -1;
+  margin-top: 3rem;
+  margin-left: 2.3rem;
+}
+
+.logo-image{
+  object-fit: contain;
+  width: 80%;
+  height: 100%;
+}
+
+.user-form{
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  max-width: 20rem;
+  min-width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+
+.custom-button {
+  border-radius: 8px;
+  border-width: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'CustomRegular', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  list-style: none;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 1;
+  outline: none;
+  -webkit-app-region: no-drag;
+}
+
+.custom-button:disabled{
+  cursor: default;
+}
+
+#status-button, #pfp-button{
+    background-image: url("../Images/green-check.png");
+    background-size: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.friend-button, .unread-button, #visitedButton, #self-button, .setting-button, .feed-user-button {
+  border-radius: 8px;
+  width: 90%;
+  align-items: center;
+  border-width: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'CustomRegular', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  list-style: none;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 0;
+  outline: none;
+  background-color: transparent;
+  -webkit-app-region: no-drag;
+}
+
+#self-button{
+    width: 100%;
+    display: flex;
+    background-size: 1rem;
+    background-position: center right 0.5rem;
+    background-repeat: no-repeat;
+}
+
+.feed-user-button{
+  width: 14rem;
+}
+
+#sidebar-button{
+  background-image: url('../Images/menu-lines.png');
+  background-size: 26px;
+  background-repeat: no-repeat;
+  align-items: center;
+  border-width: 0;
+  display: inline-block;
+  padding: 10px 30px;
+  transition: all 200ms;
+  vertical-align: baseline;
+  outline: none;
+  background-color: transparent;
+  width: 90%;
+  cursor: pointer;
+  font-family: 'CustomRegular', sans-serif;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  min-height: 1.5rem;
+}
+
+.friend-button, .unread-button, #visitedButton{
+  min-height: 3.7rem;
+}
+
+.unread-button{
+  background-image: url("../Images/badge.png");
+  background-size: 0.7rem;
+  background-position: center right 1rem;
+  background-repeat: no-repeat;
+}
+
+.login-button{
+  font-size: 16px;
+}
+
+.login-button:hover, .custom-button:hover {
+  background-color: #c65584;
+  color: white;
+}
+
+#error-label{
+  visibility: hidden;
+  color:  #c65584;
+}
+
+.theme-toggle{
+  background-color: rgba(73,73,73,0);
+  font-family: 'CustomRegular', sans-serif;
+  top: 2.5%;
+  left: 95%;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: none;
+  z-index: 1;
+  padding: 0px;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+#login-theme-toggle{
+  background-color: rgba(73,73,73,0);
+  top: 2.5%;
+  left: 90%;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: none;
+  z-index: 1;
+  padding: 0px;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  position: absolute;
+}
+
+.custom-input {
+  font-family: CustomRegular, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 6px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+  height: 3rem;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  -webkit-app-region: no-drag;
+}
+
+
+.custom-input:focus, #feed-input:focus {
+  border-color: #c65584;
+}
+
+.setting-name{
+  text-align: left;
+}
+
+.setting-separator{
+  height:3px;
+  border-width:0;
+  border-radius: 8px;
+  margin-right: 26rem;
+  margin-top: -0.8rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    body, .chat-bar, #top-bar, .setting-body, .loading-screen {background: #494949; color: white; }
+    .custom-button , .setting-separator{background-color: #494949; color: white;}
+    .custom-button:disabled{background-color: #3d3d3d}
+    .profile-setting-background{background: #3a3a3a}
+    .custom-input, #feed-input, #input-wrapper {background-color: #545454; color: #dedede; border: 2px solid #494949;}
+    #image-wrapper{background-color: #494949; color: #dedede; border: 2px solid #c65584;}
+    .theme-toggle, #login-theme-toggle{ background-image: url(../Images/Sun.png); background-size: contain; width: 20px;
+        height: 20px; background-repeat: no-repeat;}
+    #friend-button-image{content: url("../Images/add-friend-button-dark.png")}
+    #friend-button-image-new{content: url("../Images/add-friend-button-dark-badged.png")}
+    .lobby-body-expanded{background: linear-gradient(to right, #494949 60%, #333 0%)}
+    .lobby-body{  background: #494949 }
+    .friend-button:hover, #setting-container, .unread-button:hover, #friend-button-search, .profile, .setting-button:hover, #emoji-button:hover, #send-button:hover, #image-button:hover, .feed-message-background{background-color: #3A3A3AB2;}
+    .friend-button, .unread-button, .setting-button, .feed-user-button, #self-button, #self-user{color: #f2f3f5;}
+    .feed-message{color: #dcdee1}
+    ::-webkit-scrollbar-thumb{background-color: rgba(108, 108, 108, 0.7)}
+    .friend-status, .feed-date, .chat-date, .chat-hour{color: #b6b6b6;}
+    #visitedButton{background-color: #3A3A3AB2; color: white;}
+    #ip-button, #self-button{  background-image: url(../Images/settings-icon-dark.png);}
+    #unfriend-button{  background-image: url(../Images/close-button-dark.png);}
+    #unfriend-button:hover{ background-color: #c65584; color: white;}
+    #chat-setting-button{background-image: url("../Images/menu-dark.png");}
+}
+
+@media (prefers-color-scheme: light) {
+    body, .chat-bar, #top-bar, .setting-body, .loading-screen {background: #E9E8E8; color: #363636; }
+    .custom-button {background-color: #c2c2c2; color: #363636;}
+    .custom-button:disabled{background-color: #d2d2d2;}
+    .profile-setting-background{background: #dadada}
+    .custom-input, #feed-input, #input-wrapper {background-color: #c2c2c2; color: #333333; border: 2px solid #c2c2c2;}
+    .theme-toggle, #login-theme-toggle{ background-image: url(../Images/Moon_light.png); background-size: contain; width: 20px;
+        height: 20px; background-repeat: no-repeat;}
+    #friend-button-image{content: url("../Images/add-friend-button-light.png")}
+    #friend-button-image-new{content: url("../Images/add-friend-button-light-badged.png")}
+    .lobby-body-expanded{background: linear-gradient(to right, #dadada 60%, #E9E8E8 0%)}
+    .lobby-body{background: #E9E8E8}
+    .side-menu{background: #dadada}
+    #feed-input, #input-wrapper, #send-feed-button, .feed-message-background{background-color: #dadada; border-color: #dadada;}
+    #image-wrapper{background-color: #dadada; border: 2px solid #c65584;}
+    .friend-button:hover, #setting-container, .unread-button:hover,  #friend-button-search, .profile, .setting-button:hover, .setting-separator, #emoji-button:hover, #send-button:hover, #image-button:hover {background-color: #c4c4c4;}
+    .friend-button, .feed-user-button, #self-button, .unread-button, .setting-button{color: #363636;}
+    .friend-status, .feed-date, .chat-date, .chat-hour, #chat-status{color: #696969;}
+    #visitedButton, #unfriend-button, ::-webkit-scrollbar-thumb{background-color: #adadad; color: #363636;}
+    #ip-button, #self-button{  background-image: url(../Images/settings-icon-light.png);}
+    #unfriend-button{  background-image: url(../Images/close-button-light.png);}
+    #unfriend-button:hover{  background-image: url(../Images/close-button-dark.png); background-color: #c65584; color: white;}
+    #chat-setting-button{background-image: url("../Images/menu-light.png");}
+    #chat-setting-button:hover{background-image: url("../Images/menu-dark.png");}
+}

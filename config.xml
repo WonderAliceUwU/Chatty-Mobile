@@ -1,18 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="Chatty" version="1.0.0">
+<widget id="Chatty" version="1.0.2">
     <name>Chatty</name>
     <content src="Pages/Login/login.html" />
+    <access origin="http://*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-navigation href="*"/>
-    <access origin="*" />
+    <allow-navigation href="*" />
+    <!-- Enhancements for iOS platform -->
     <platform name="ios">
-        <!-- iOS-specific preferences -->
-        <preference name="DisallowOverscroll" value="false" />
-        <preference name="AutoHideSplashScreen" value="true" />
-        <!-- Allow navigation to specific URLs -->
-        <allow-navigation href="http://*/*" />
-        <allow-navigation href="https://*/*" />
-        <access origin="*" />
+        <preference name="WKWebViewOnly" value="true" />
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+        <feature name="CDVWKWebViewEngine">
+            <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
     </platform>
 </widget>
