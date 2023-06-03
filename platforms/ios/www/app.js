@@ -1,3 +1,9 @@
+/*If cors error, search for this WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+and put this down:
+[configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
+[configuration setValue:@"TRUE" forKey:@"allowUniversalAccessFromFileURLs"];
+ */
+
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
@@ -6,9 +12,23 @@ function onDeviceReady() {
   window.addEventListener('keyboardWillShow', onKeyboardShow);
   window.addEventListener('keyboardWillHide', onKeyboardHide);
 
-    const socket = io('http://' + localStorage.getItem('server'), {
-      query: { username: localStorage.getItem('username') }
-    });
+  connectServer()
+
+  cordova.plugins.backgroundMode.enable();
+
+  cordova.plugins.backgroundMode.on('activate', function() {
+    // App is becoming active again
+    // Reconnect to the server here
+    connectServer();
+    location.reload()
+  });
+
+
+}
+function connectServer(){
+  const socket = io('http://' + localStorage.getItem('server'), {
+    query: { username: localStorage.getItem('username') }
+  });
 
 
   // Listen for incoming messages
@@ -37,7 +57,17 @@ function onDeviceReady() {
       }
     }
     else{
-      //todo
+      const friendElements = document.querySelectorAll('.friend-name');
+      let friendElement;
+
+      for (const element of friendElements) {
+        if (element.textContent === from) {
+          friendElement = element;
+          break;
+        }
+      }
+      friendElement.parentNode.className = 'unread-button'
+
     }
     console.log(`Received message from ${from}: ${text}`);
   });
@@ -47,7 +77,6 @@ function onDeviceReady() {
     // Perform any necessary actions when disconnected
   });
 }
-
 function onKeyboardShow(e) {
   document.getElementById('lobby-body').style.paddingBottom = '0%'
 }

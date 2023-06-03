@@ -14,6 +14,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-ios": "^6.3.0",
+    "cordova-plugin-background-mode": "^0.7.3",
+    "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-local-notifications": "^1.0.0",
@@ -28,7 +30,8 @@
       "cordova-plugin-websocket": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-keyboard": {}
+      "cordova-plugin-keyboard": {},
+      "cordova-plugin-background-mode": {}
     }
   },
   "dependencies": {

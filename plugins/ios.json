@@ -18,7 +18,14 @@
     },
     "cordova-plugin-websocket": {
       "PACKAGE_NAME": "com.wonderalice.Chatty"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "Chatty"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "Chatty"
+    }
+  }
 }
