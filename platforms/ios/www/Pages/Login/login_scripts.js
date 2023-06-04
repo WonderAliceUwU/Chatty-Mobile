@@ -13,6 +13,9 @@ window.onload = async function () {
     if (localStorage.getItem('server') === null){
         defaultIP()
     }
+    if (localStorage.getItem('username') !== null && localStorage.getItem('logged') === 'yes'){
+        openMain()
+    }
 }
 
 async function login(){
@@ -54,7 +57,7 @@ async function login(){
     }
 }
 
-var x = document.getElementById("PassInput");
+let x = document.getElementById("PassInput");
     if (x.type === "password") {
         x.type = "text";
     } else {
@@ -71,7 +74,7 @@ document.getElementById('ip-input').addEventListener('input', enableButton)
 document.getElementById('change-ip-button').addEventListener('click', saveIP)
 document.getElementById('default-ip-button').addEventListener('click', defaultIP)
 if (localStorage.getItem('server') !== null){
-    if (localStorage.getItem('server') === '34.175.231.104:3000'){
+    if (localStorage.getItem('server') === '34.0.215.235:3000'){
         document.getElementById('ip-input').value = 'Default IP'
     }
     else{
@@ -97,7 +100,7 @@ function saveIP(){
 }
 
 function defaultIP(){
-    localStorage.setItem('server', '34.175.231.104:3000')
+    localStorage.setItem('server', '34.0.215.235:3000')
     document.getElementById('ip-input').value = 'Chatty server'
     document.getElementById('change-ip-button').disabled = true
 }

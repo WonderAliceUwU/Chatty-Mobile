@@ -9,9 +9,6 @@ function enableUpload(){
     document.getElementById('pfp-button').disabled = false;
 }
 
-function logout(){
-    cordova.InAppBrowser.open('../Login/login.html', '_self');
-}
 async function imageUpload() {
     const formData = new FormData();
     const imageFile = document.getElementById('pfp-input');

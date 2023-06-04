@@ -22,45 +22,6 @@ function toggleSidebar() {
     }
 }
 
-function newMessage(text, from ) {
-    let today = new Date
-    let time = today.getHours() + ":" + today.getMinutes()
-    let friend = document.getElementById('visitedName').textContent
-    if (friend === from) {
-        applyMessage(text, time)
-        fetch(`http://` + localStorage.getItem('server') + `/read-friend?token=${localStorage.getItem('token')}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({friend}),
-        });
-    } else {
-        const friendElements = document.querySelectorAll('.friend-name');
-        let friendElement;
-
-        for (const element of friendElements) {
-            if (element.textContent === from) {
-                friendElement = element;
-                break;
-            }
-        }
-        friendElement.parentNode.className = 'unread-button'
-    }
-}
-function applyUnread(from) {
-    const friendElements = document.querySelectorAll('.friend-name');
-    let friendElement;
-
-    for (const element of friendElements) {
-        if (element.textContent === from) {
-            friendElement = element;
-            break;
-        }
-    }
-    friendElement.parentNode.className = 'unread-button'
-}
-
 function applyIncomingMessage(text, time, filename){
     let parent = document.getElementById('chat-div')
     let feedMessage=document.createElement('div')
@@ -99,6 +60,7 @@ function openFriends() {
 }
 
 function openMain() {
+    localStorage.setItem('logged', 'yes');
     cordova.InAppBrowser.open('../Main/main.html', '_self');
 }
 
@@ -109,12 +71,12 @@ function openSettings() {
 
 }
 
-function openChat(friendName) {
-    localStorage.setItem("userdata", friendName)
-    cordova.InAppBrowser.open('../Chat/chat.html', '_self');
-
+function logout(){
+    localStorage.setItem('logged', 'no');
+    localStorage.removeItem('username');
+    location.href = '../Login/login.html'
+    connectServer('disconnect')
 }
-
 async function getProfileUrl(username) {
     const response = await fetch(`http://` + localStorage.getItem('server') + `/request-pfp-url`, {
         method: 'POST',

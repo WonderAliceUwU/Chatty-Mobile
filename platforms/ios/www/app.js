@@ -6,27 +6,30 @@ and put this down:
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
+
 function onDeviceReady() {
   // Cordova is ready, you can now use Cordova APIs
   // Connect to the WebSocket server
   window.addEventListener('keyboardWillShow', onKeyboardShow);
   window.addEventListener('keyboardWillHide', onKeyboardHide);
 
-  connectServer()
+  connectServer('connect')
 
   cordova.plugins.backgroundMode.enable();
 
   cordova.plugins.backgroundMode.on('activate', function() {
     // App is becoming active again
     // Reconnect to the server here
-    connectServer();
+    connectServer('connect');
     location.reload()
   });
 
 
 }
-function connectServer(){
-  const socket = io('http://' + localStorage.getItem('server'), {
+function connectServer(mode){
+  let socket;
+  if (mode === 'connect'){
+    socket = io('http://' + localStorage.getItem('server'), {
     query: { username: localStorage.getItem('username') }
   });
 
@@ -71,13 +74,18 @@ function connectServer(){
     }
     console.log(`Received message from ${from}: ${text}`);
   });
+  }
 
   socket.on('disconnect', () => {
     console.log('Disconnected from server');
     // Perform any necessary actions when disconnected
   });
+
+  if (mode === 'disconnect'){
+    socket.disconnect()
+  }
 }
-function onKeyboardShow(e) {
+function onKeyboardShow() {
   document.getElementById('lobby-body').style.paddingBottom = '0%'
 }
 
