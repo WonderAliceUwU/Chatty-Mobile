@@ -2,6 +2,7 @@ const sidebarButton = document.getElementById('sidebar-button');
 const body = document.getElementById('lobby-body')
 sidebarButton.addEventListener('click', toggleSidebar);
 let toggled = false;
+
 // Toggle sidebar visibility
 function toggleSidebar() {
     if(toggled === false){

@@ -19,7 +19,6 @@
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-local-notifications": "^1.0.0",
-    "cordova-plugin-statusbar": "^3.0.0",
     "cordova-plugin-websocket": "^0.12.2"
   },
   "cordova": {
@@ -29,7 +28,6 @@
     "plugins": {
       "cordova-plugin-websocket": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-statusbar": {},
       "cordova-plugin-keyboard": {},
       "cordova-plugin-background-mode": {}
     }

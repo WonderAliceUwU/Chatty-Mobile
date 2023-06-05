@@ -8,10 +8,6 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 
 function onDeviceReady() {
-  // Cordova is ready, you can now use Cordova APIs
-  // Connect to the WebSocket server
-  window.addEventListener('keyboardWillShow', onKeyboardShow);
-  window.addEventListener('keyboardWillHide', onKeyboardHide);
 
   connectServer('connect')
 
@@ -84,13 +80,4 @@ function connectServer(mode){
   if (mode === 'disconnect'){
     socket.disconnect()
   }
-}
-function onKeyboardShow() {
-  document.getElementById('lobby-body').style.paddingBottom = '0%'
-}
-
-// Keyboard hide event handler
-function onKeyboardHide() {
-  window.scrollTo(0, 0);
-  document.getElementById('lobby-body').style.paddingBottom = '28%'
 }

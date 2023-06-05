@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		040493CE002A4CCCB330D038 /* CDVInAppBrowserNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D162BA20747EAA391EDD6 /* CDVInAppBrowserNavigationController.m */; };
-		11EFC6EA7F9241E3965C3F65 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F32C41F23D4F4DAEAB134F93 /* CDVStatusBar.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		2DAF005D20454DDB9D4C2C69 /* CDVKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 90E8DEAA13444862AD109923 /* CDVKeyboard.m */; };
@@ -79,8 +78,6 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F1187DECB56E4746BEBBD7E7 /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
-		F32C41F23D4F4DAEAB134F93 /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Chatty/config.xml; sourceTree = "<group>"; };
 		FD79E4F6FA504788BDAB4F34 /* CDVWKInAppBrowserUIDelegate.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVWKInAppBrowserUIDelegate.m; path = "cordova-plugin-inappbrowser/CDVWKInAppBrowserUIDelegate.m"; sourceTree = "<group>"; };
 		FA549202D237418A823389F0 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
@@ -205,8 +202,6 @@
 				721FE61C26FA47EB912F5865 /* CDVWKInAppBrowserUIDelegate.h */,
 				90E8DEAA13444862AD109923 /* CDVKeyboard.m */,
 				696F1652B13C4211A7AF3C11 /* CDVKeyboard.h */,
-				F32C41F23D4F4DAEAB134F93 /* CDVStatusBar.m */,
-				F1187DECB56E4746BEBBD7E7 /* CDVStatusBar.h */,
 				FA549202D237418A823389F0 /* CDVDevice.m */,
 				127AD2FA5EC84D42AE1D5B25 /* CDVDevice.h */,
 				0A8B4B9F81EC44F6B09DA566 /* APPBackgroundMode.m */,
@@ -347,7 +342,6 @@
 				DA5D9F55C432451FA7BD4DED /* CDVWKInAppBrowser.m in Sources */,
 				B55D8F8937FF48A4ADB36633 /* CDVWKInAppBrowserUIDelegate.m in Sources */,
 				2DAF005D20454DDB9D4C2C69 /* CDVKeyboard.m in Sources */,
-				11EFC6EA7F9241E3965C3F65 /* CDVStatusBar.m in Sources */,
 				FE295934E5734735BB955F67 /* CDVDevice.m in Sources */,
 				4BC0C853680247E69A8A6604 /* APPBackgroundMode.m in Sources */,
 				8B9233CAD02C4700BB1A202B /* APPMethodMagic.m in Sources */,

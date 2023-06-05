@@ -1,0 +1,31 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.wonderalice.Chatty"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "com.wonderalice.Chatty"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.wonderalice.Chatty"
+    },
+    "cordova-plugin-websocket": {
+      "PACKAGE_NAME": "com.wonderalice.Chatty"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "Chatty"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "Chatty"
+    }
+  }
+}

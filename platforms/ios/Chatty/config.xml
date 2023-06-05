@@ -32,10 +32,6 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="CDVKeyboard" />
     </feature>
-    <feature name="StatusBar">
-        <param name="ios-package" value="CDVStatusBar" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
@@ -62,8 +58,6 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="WKWebViewOnly" value="true" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 </widget>
