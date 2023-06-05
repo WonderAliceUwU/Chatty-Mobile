@@ -1,9 +1,5 @@
 document.querySelector("#login-button").addEventListener("click", login)
 document.querySelector("#register-button").addEventListener("click", goRegister)
-document.getElementById('login-theme-toggle').addEventListener('click', async () => {
-    const isDarkMode = await window.darkMode.toggle()
-    document.getElementById('theme-source').innerHTML = isDarkMode ? 'Dark' : 'Light'
-})
 
 if (localStorage.getItem('appearance') === null){
     localStorage.setItem('appearance', 'system');
